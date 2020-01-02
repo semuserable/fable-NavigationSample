@@ -4,11 +4,11 @@ open Client
 open Elmish
 open Elmish.Navigation
 open Client.Pages
-open Fable.Core
 
 type PageModel =
     | HomeModel of Home.Model
     | GameModel of Game.Model
+    | InteropModel of Interop.Model
 
 type Model = {
     PageModel: PageModel
@@ -17,6 +17,7 @@ type Model = {
 type Message =
     | HomeMsg of Home.Msg
     | GameMsg of Game.Msg
+    | InteropMsg of Interop.Msg
     
 let urlUpdate (result: Option<Page>) model =
     match result with
@@ -28,6 +29,9 @@ let urlUpdate (result: Option<Page>) model =
     | Some Page.Game ->
         let subModel, cmd = Game.init ()
         { model with PageModel = GameModel subModel }, cmd
+    | Some Page.Interop ->
+        let subModel, cmd = Interop.init ()
+        { model with PageModel = InteropModel subModel }, cmd
 
 let init page =
     let initialModel = HomeModel { Title = "Main Title"; Content = "Main Content" }
@@ -41,6 +45,7 @@ let update msg model =
     | GameMsg gameMsg, GameModel gameModel ->
         let ms, cmd = Game.update gameMsg gameModel
         { model with PageModel = GameModel ms }, Cmd.map GameMsg cmd
+    | _ -> model, Cmd.none
 
 open Fable.React
 open Fable.React.Props
@@ -54,11 +59,15 @@ let view (model: Model) (dispatch: Dispatch<Message>) =
             li [] [
                 a [ Href (toPage Page.Game) ] [ str "Game" ]
             ]
+            li [] [
+                a [ Href (toPage Page.Interop) ] [ str "Interop" ]
+            ]
         ]
         div [] [
             match model.PageModel with
             | HomeModel m -> yield Home.view { Model = m; Dispatch = HomeMsg >> dispatch }
             | GameModel m -> yield Game.view { Model = m; Dispatch = GameMsg >> dispatch }
+            | InteropModel m -> yield Interop.view { Model = m; Dispatch = InteropMsg >> dispatch }
         ]
     ]
 

@@ -4,9 +4,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Pages.fs" />
+    <Compile Include="experiments\CustomFileInterop.fs" />
     <Compile Include="pages\Utils.fs" />
     <Compile Include="pages\HomePage.fs" />
     <Compile Include="pages\GamePage.fs" />
+    <Compile Include="pages\InteropPage.fs" />
     <Compile Include="App.fs" />
   </ItemGroup>
   <ItemGroup>
