@@ -45,7 +45,7 @@ export function calculateSum(obj) {
 }
 
 *)
-module CustomFileInterop =
+(*module CustomFileInterop =
 
     open Fable.Core
     open Fable.Core.JsInterop
@@ -115,6 +115,7 @@ module CustomFileInterop =
     )
 
     let run =
+        
         JS.console.log calculateProp
         // interopLib.triggerAlert "From F#"
         interopLib.someString + " " +
@@ -122,4 +123,4 @@ module CustomFileInterop =
         (string (myObject.isAwesome ())) + " " +
         (string (myClassStatic.getPI ())) + " " +
         (string (calculate calculateProp)) + " " +
-        (string (calculate2Call [X 10.; Y 20.; Day Tuesday]))
+        (string (calculate2Call [X 10.; Y 20.; Day Tuesday]))*)
